@@ -55,19 +55,22 @@ cc -Wall -Wextra -Werror main.c libftprintf.a -o main
 - **Reading the format:** `ft_printf` walks the format string once, one character at a time, with
   an index. Normal characters are written straight away with `write`. When a `%` is found, the
   next character is sent to `print_check`, which picks the right print function with a chain of
-  `if` / `else if`. Adding a new conversion only means adding one more branch and one function.
+  `if` / `else if`. Adding a new conversion only means adding one more branch.
 - **Counting characters:** every print function receives a pointer to the same `int` counter
   (`len`) and adds to it each time it writes, so `ft_printf` just returns that counter at the end.
-- **Decimal numbers (`%d`, `%i`, `%u`):** printed recursively: the function calls itself with
-  `number / 10` first, then prints `number % 10`, so the digits come out in the right order
-  without any buffer. `INT_MIN` is printed as a special case because `-INT_MIN` does not fit in
-  an `int`.
-- **Hexadecimal (`%x`, `%X`, `%p`):** the number is divided by 16 repeatedly and each digit is
-  taken from a base string (`"0123456789abcdef"` or the uppercase one), stored in a small array on
-  the stack, then printed backwards.
-- **Data structures:** none on the heap. The only data is the `va_list`, the counter and a
-  small fixed-size `char` array. There is no `malloc`, so there is nothing to free and no
-  possible leak, and there is no output buffer, as the subject asks.
+- **Numbers (`%d`, `%i`, `%u`, `%x`, `%X`, `%p`):** all of them go through one function,
+  `fput_base`, which prints an unsigned number in any base given as a string (`"0123456789"`,
+  `"0123456789abcdef"` or `"0123456789ABCDEF"`). The size of the base is the length of that string.
+  It is recursive: it calls itself with `number / size` first, then prints `base[number % size]`,
+  so the digits come out in the right order without any buffer.
+  - `%d` / `%i`: the `int` is copied into a `long`, so it can be made positive after printing the
+    `-`, even for `INT_MIN` (whose positive value does not fit in an `int`).
+  - `%p`: prints `0x` and then the address in lowercase hexadecimal, or `(nil)` for NULL.
+- **Strings (`%s`):** the length is counted first, then the whole string is written with a single
+  `write` call (`(null)` for a NULL pointer).
+- **Data structures:** none on the heap. The only data is the `va_list` and the counter. There is
+  no `malloc`, so there is nothing to free and no possible leak, and there is no output buffer,
+  as the subject asks.
 
 ## Resources
 

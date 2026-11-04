@@ -19,11 +19,11 @@ static void	print_check(char s, va_list *args, int *len, int *i)
 	else if (s == 'd' || s == 'i')
 		fnum(va_arg(*args, int), len);
 	else if (s == 'u')
-		funsigned_int(va_arg(*args, unsigned int), len);
+		fput_base(va_arg(*args, unsigned int), DECIMAL, len);
 	else if (s == 'x')
-		fhexadecimal(va_arg(*args, unsigned int), len, 'x');
+		fput_base(va_arg(*args, unsigned int), HEX_LOWER, len);
 	else if (s == 'X')
-		fhexadecimal(va_arg(*args, unsigned int), len, 'X');
+		fput_base(va_arg(*args, unsigned int), HEX_UPPER, len);
 	else if (s == 'p')
 		fpointer((unsigned long)va_arg(*args, void *), len);
 	else if (s == 'c')

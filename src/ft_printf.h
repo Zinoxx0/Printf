@@ -16,15 +16,17 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stddef.h>
-# include <stdlib.h>
 
-void	fnum(int number, int *length);
-void	fhexadecimal(unsigned int x, int *length, char x_or_x);
-void	funsigned_int(unsigned int u, int *length);
-void	fpointer(unsigned long pointer, int *length);
+# define DECIMAL "0123456789"
+# define HEX_LOWER "0123456789abcdef"
+# define HEX_UPPER "0123456789ABCDEF"
+
+void	fput_base(unsigned long number, char *base, int *len);
+void	fnum(int number, int *len);
+void	fpointer(unsigned long pointer, int *len);
 
 void	fputchar(char chr, int *len);
-void	fputstr(char *args, int *len);
+void	fputstr(char *str, int *len);
 
 int		ft_printf(const char *string, ...);
 

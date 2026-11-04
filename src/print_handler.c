@@ -18,20 +18,15 @@ void	fputchar(char chr, int *len)
 	(*len)++;
 }
 
-void	fputstr(char *args, int *len)
+void	fputstr(char *str, int *len)
 {
 	size_t	i;
 
+	if (!str)
+		str = "(null)";
 	i = 0;
-	if (args == 0)
-	{
-		write(1, "(null)", 6);
-		(*len) += 6;
-		return ;
-	}
-	while (args[i] != '\0')
-	{
-		fputchar(args[i], len);
+	while (str[i])
 		i++;
-	}
+	write(1, str, i);
+	(*len) += i;
 }
