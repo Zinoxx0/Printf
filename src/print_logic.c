@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numbers.c                                       :+:      :+:    :+:   */
+/*   print_logic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sezequie <sezequie@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: samercad <samercad@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 20:23:50 by sezequie          #+#    #+#             */
-/*   Updated: 2023/10/16 21:53:51 by sezequie         ###   ########.fr       */
+/*   Created: 2026/11/04 19:35:56 by samercad          #+#    #+#             */
+/*   Updated: 2026/11/04 19:35:57 by samercad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	fhexadecimal(unsigned int number, int *len, char choose)
 		hexa_base = "0123456789ABCDEF";
 	else
 		hexa_base = "0123456789abcdef";
-	i = 0;
 	if (number == 0)
 	{
 		fputchar('0', len);
@@ -63,7 +62,7 @@ void	fhexadecimal(unsigned int number, int *len, char choose)
 	}
 	while (number != 0)
 	{
-		str[i] = hexa_base [number % 16];
+		str[i] = hexa_base[number % 16];
 		number = number / 16;
 		i++;
 	}
@@ -71,7 +70,7 @@ void	fhexadecimal(unsigned int number, int *len, char choose)
 		fputchar(str[i], len);
 }
 
-void	fpointer(size_t pointer, int *len)
+void	fpointer(unsigned long pointer, int *len)
 {
 	char	str[25];
 	int		i;

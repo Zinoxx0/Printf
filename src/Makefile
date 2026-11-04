@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sezequie <sezequie@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: samercad <samercad@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/15 20:24:25 by sezequie          #+#    #+#              #
-#    Updated: 2023/10/18 13:39:03 by sezequie         ###   ########.fr        #
+#    Created: 2026/11/04 19:35:44 by samercad          #+#    #+#              #
+#    Updated: 2026/11/04 19:35:45 by samercad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,15 @@ all:	$(NAME)
 $(NAME):	$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 
+$(OBJS):	ft_printf.h
+
 clean:
 		$(RM) $(OBJS)
 
 fclean:		clean
 		$(RM) $(NAME)
 
-re:		fclean all
+re:		fclean
+		$(MAKE) all
+
+.PHONY:	all clean fclean re
